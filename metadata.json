@@ -1,0 +1,7 @@
+{
+  "name": "Trader",
+  "description": "An AI-powered production studio for music, podcasts, and video.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

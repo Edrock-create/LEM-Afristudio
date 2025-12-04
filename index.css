@@ -1,0 +1,441 @@
+
+/* --- LISWANISO'S CANVAS: THE ZAMBEZI PROTOCOL --- */
+
+:root {
+    /* THE LUSAKA PALETTE */
+    --zambezi-deep: #020408;
+    --zambezi-flow: #0a1525;
+    --obsidian-glass: rgba(5, 5, 8, 0.85);
+    
+    --neon-cyan: #00f3ff;
+    --neon-magenta: #bc13fe;
+    --neon-acid: #ccff00;
+    --plasma-white: rgba(255, 255, 255, 0.95);
+    
+    --glass-panel: rgba(20, 30, 50, 0.4);
+    --glass-border: rgba(0, 243, 255, 0.2);
+    
+    --shadow-hologram: 0 0 30px rgba(0, 243, 255, 0.15);
+    --font-hud: 'Roboto Mono', monospace;
+    --font-body: 'Inter', sans-serif;
+    --ease-elastic: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* --- THE LIVING CANVAS (Background) --- */
+body {
+    margin: 0; padding: 0;
+    width: 100%; min-height: 100vh;
+    background-color: var(--zambezi-deep);
+    color: var(--plasma-white);
+    font-family: var(--font-hud);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* THE ZAMBEZI FLOW ANIMATION */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 50% 50%, #112233 0%, var(--zambezi-deep) 60%);
+    opacity: 0.4;
+    animation: flow 20s infinite linear;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes flow {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+/* --- THE ONTOLOGY GRID (METAPHYSICAL HUD) --- */
+.ontology-grid {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pillar-card {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--neon-cyan);
+    color: #fff;
+    padding: 5px 10px;
+    font-family: var(--font-hud);
+    font-size: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 80px;
+    height: 35px;
+}
+
+.pillar-card:hover {
+    background: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.pillar-card:disabled {
+    border-color: #444;
+    color: #666;
+    cursor: default;
+    box-shadow: none;
+    background: transparent;
+}
+
+
+/* --- THE MONOLITH (Input Container) --- */
+.monolith-container {
+    position: relative; 
+    width: 100%; 
+    max-width: 700px; 
+    margin: 40px auto 60px auto; 
+    padding: 0;
+    background: transparent;
+    perspective: 1000px;
+    z-index: 100;
+}
+
+#topic-input {
+    width: 100%;
+    padding: 30px;
+    background: var(--obsidian-glass);
+    border: 1px solid var(--glass-border);
+    border-bottom: 2px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    font-family: var(--font-hud);
+    font-size: 1.2rem;
+    text-align: center;
+    letter-spacing: 2px;
+    backdrop-filter: blur(20px);
+    transition: all 0.5s var(--ease-elastic);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.8);
+    transform-style: preserve-3d;
+}
+
+#topic-input:focus {
+    outline: none;
+    border-color: var(--neon-magenta);
+    box-shadow: 0 0 60px rgba(188, 19, 254, 0.2), inset 0 0 10px rgba(188, 19, 254, 0.1);
+    transform: scale(1.02) translateZ(10px);
+    letter-spacing: 4px; /* The expansion of consciousness */
+}
+
+/* --- THE CHAMBER GRID (Hexagonal Tech) --- */
+.chamber-matrix-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    perspective: 1000px;
+}
+
+.chamber-cell {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(0,0,0,0.4));
+    border: 1px solid rgba(255,255,255,0.05);
+    color: #666;
+    font-family: var(--font-hud);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* The Scanline Effect */
+.chamber-cell::after {
+    content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 50%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.1), transparent);
+    transition: top 0.4s ease;
+}
+
+.chamber-cell:hover {
+    transform: translateY(-5px);
+    border-color: var(--neon-cyan);
+    color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+}
+
+.chamber-cell:hover::after { top: 100%; }
+
+/* --- THE FLOATING CONSOLE (Action Bar) --- */
+.floating-console {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    padding: 10px;
+    background: rgba(10, 15, 20, 0.85);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(15px);
+    border-radius: 4px;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 243, 255, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.floating-console:hover {
+    box-shadow: 0 0 60px rgba(0, 243, 255, 0.2);
+    border-color: var(--neon-cyan);
+}
+
+.floating-console button {
+    background: transparent;
+    border: 1px solid #333;
+    color: #888;
+    padding: 12px 24px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+}
+
+.floating-console button:hover {
+    color: #fff;
+    border-color: #fff;
+}
+
+/* Primary Action Upgrade */
+.floating-console button.primary-action {
+    background: var(--neon-cyan);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.floating-console button.primary-action:hover {
+    background: #fff;
+    box-shadow: 0 0 30px var(--neon-cyan);
+    transform: scale(1.05);
+}
+
+/* --- SOURCE HEADER --- */
+.source-header {
+    font-size: 14px;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    padding: 15px 40px;
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    border-top: 1px solid rgba(0,243,255,0.3);
+    border-bottom: 1px solid rgba(0,243,255,0.3);
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+    display: inline-block;
+}
+
+/* --- UTILITIES & LAYOUT --- */
+.app-container-3d {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.layout-max-width { width: 100%; max-width: 900px; }
+
+/* Header Override */
+.app-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+/* --- PHASE 2: THE ARMORY (Persona Grid) --- */
+
+.persona-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.persona-card {
+    position: relative;
+    background: rgba(10, 15, 20, 0.6);
+    border: 1px solid #333;
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow: hidden;
+}
+
+.persona-card:hover {
+    background: rgba(0, 243, 255, 0.05);
+    border-color: #555;
+    transform: translateY(-2px);
+}
+
+.persona-card.active {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1), inset 0 0 10px rgba(0, 243, 255, 0.05);
+}
+
+/* The Avatar */
+.persona-avatar {
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+}
+
+.persona-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.persona-name {
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.persona-desc {
+    color: #888;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+/* Weapon Stats */
+.persona-stats {
+    margin-top: auto;
+    background: rgba(0,0,0,0.3);
+    padding: 8px;
+    border-radius: 2px;
+}
+
+.stat-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.6rem;
+    color: #555;
+    margin-bottom: 3px;
+}
+
+.stat-bar {
+    flex: 1;
+    height: 3px;
+    background: #222;
+}
+
+.stat-bar div {
+    height: 100%;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 5px var(--neon-cyan);
+}
+
+.persona-card.active .stat-bar div {
+    background: var(--neon-acid);
+    box-shadow: 0 0 5px var(--neon-acid);
+}
+
+.stat-meta {
+    font-size: 0.6rem;
+    color: #444;
+    text-align: right;
+    margin-top: 5px;
+}
+
+/* Targeting Effects */
+.corner-bracket {
+    position: absolute;
+    top: 0; right: 0;
+    width: 15px; height: 15px;
+    border-top: 2px solid var(--neon-cyan);
+    border-right: 2px solid var(--neon-cyan);
+}
+
+.scanline {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: rgba(0, 243, 255, 0.5);
+    animation: scan 2s linear infinite;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+@keyframes scan {
+    0% { top: 0%; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+}
+
+/* Navigation Buttons */
+.back-trigger {
+    background: none;
+    border: none;
+    color: #555;
+    font-family: var(--font-hud);
+    font-size: 0.7rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: color 0.2s;
+}
+.back-trigger:hover { color: var(--neon-magenta); }
+
+.console-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.weapon-confirm {
+    padding: 15px 40px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    background: var(--neon-cyan);
+    color: #000;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: all 0.2s ease;
+}
+
+.weapon-confirm:hover:not(:disabled) {
+    background: #fff;
+    box-shadow: 0 0 20px var(--neon-cyan);
+    transform: scale(1.05);
+}
+
+.weapon-confirm:disabled {
+    background: #333;
+    color: #555;
+    cursor: not-allowed;
+    box-shadow: none;
+}
